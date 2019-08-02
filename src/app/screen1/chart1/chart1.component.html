@@ -1,0 +1,23 @@
+<!-- to enter user's input -->
+<form [formGroup]="inputFormGroup" class="input-form">
+    <mat-form-field class="input-full-width" >
+      <input matInput placeholder="Enter Year" formControlName="year" #year required>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field class="input-full-width" >
+        <input matInput placeholder="Enter Average Rainfall" formControlName="rainfall" #avgRainfall required>
+    </mat-form-field>
+</form>
+
+<!-- To add new point -->
+<button class="btn btn-primary" (click)="add(year.value, avgRainfall.value)">Add Point!</button>
+
+<br><br>
+<!-- charts -->
+
+<div class="chart" *ngFor = "let chart of allCharts" [chart] = "chart"></div>
+
+<div class="chart" [chart] = "pieChart"></div>
+
+<div class="chart" [chart] = "donutChart"></div>

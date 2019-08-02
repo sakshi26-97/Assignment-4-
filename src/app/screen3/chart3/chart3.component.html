@@ -1,0 +1,42 @@
+<!-- User Input -->
+<form [formGroup]="inputFormGroup" class="input-form">
+    <mat-form-field class="input-full-width" >
+      <input matInput placeholder="Enter String" formControlName="text" [(ngModel)] = "data" #values (ngModelChange) = "onChange($event)" required>
+    </mat-form-field>
+</form>
+
+<br><br>
+
+<!-- Displaying Values -->
+<div class = "container" *ngIf = "values.value!=0">
+    <div class="table-responsive">          
+        <table class="table">
+
+            <tr>
+              <td>Word count</td>
+              <td>{{ wordCount }}</td>
+            </tr>
+
+            <tr>
+                <td>Number of vowels</td>
+                <td>{{ vowelCount }}</td>
+            </tr>
+
+            <tr>
+                <td>Number of articles in the text</td>
+                <td>{{ articlesCount }}</td>
+            </tr>
+
+            <tr>
+              <td>Length the longest word in the text</td>
+              <td>{{ longestWord }}</td>
+            </tr>
+
+            <tr>
+                <td>Length of the shortest word in the text (not an article)</td>
+                <td>{{ shortestWord }}</td>
+            </tr>
+         
+        </table>
+        </div>
+</div>
