@@ -81,7 +81,7 @@ export class Chart2Component implements OnInit {
   }
   
   // Generates Random Data using Random Generator Function
-  randomDataGeneration() {
+  generateRandomData() {
     for(this.i of this.allCharts ) {
     let rainy = Math.floor(Math.random() * 1000);
     let yearly = (parseInt(this.categoryArray[this.categoryArray.length-1]) + 1).toString();
@@ -93,11 +93,11 @@ export class Chart2Component implements OnInit {
     }
   }
 
-  // Calls randomDataGeneration() funtion after every 2 sec
+  // Calls generateRandomData() funtion after every 2 sec
   initRandom() {
     this.intervals = interval(2000).subscribe((val)=> {
       console.log("val", val);
-      this.randomDataGeneration();
+      this.generateRandomData();
     })
   }
 

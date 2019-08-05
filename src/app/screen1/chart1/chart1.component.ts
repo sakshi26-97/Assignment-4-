@@ -136,7 +136,7 @@ drawDonut() {
   })
 }
 
-  // funtion to add new point in graph
+  // function to add new point in graph
   add(year, rainfall) {
     console.log(year, rainfall)
 
