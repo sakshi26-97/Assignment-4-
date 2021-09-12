@@ -1,27 +1,28 @@
-# Assignment4
+# HighCharts 
+Various types of Angular Highcharts like pie, donut, bar, area graph are used to depict pictorial information
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
+### UI Screenshot
+- In [screen1](http://localhost:4200/screen1/chart1), the user enters the year and average rainfall. The entered value gets added and is reflected in the following column, bar, donut and pie chart
 
-## Development server
+![screen1.png](/src/assets/ss/screen1.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- In [screen2](http://localhost:4200/screen2/chart2), the following year along with the randomly generated average rainfall data gets added and is reflected in the chart. The user can stop and resume of adding data in the chart.
 
-## Code scaffolding
+![screen2.png](/src/assets/ss/screen2.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- In [screen3](http://localhost:4200/screen3/chart3), the user enters the text. The word count, vowel count, number of articles in the text, length of the longest and shortest word(other than an article) in the text is displayed in the tabular format for the entered text.
 
-## Build
+![screen3.png](/src/assets/ss/screen3.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Setup
 
-## Running unit tests
+- Download or clone the git repository
+- `cd [folder-name]`
+- Install the dependencies
+`npm install`
+- Start the app using the command
+`npm start`
+OR
+`ng serve`
+- Once the app is running navigate to `http://localhost:4200`. The app will automatically reload if you change any of the source files.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
