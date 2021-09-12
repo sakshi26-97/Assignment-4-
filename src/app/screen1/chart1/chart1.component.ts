@@ -9,26 +9,24 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 
 export class Chart1Component implements OnInit {
-  public typeChart;
-  public pieChart;
-  public donutChart;
+  public pieChart: Chart;
+  public donutChart: Chart;
   allCharts:any = [];
-  i;
   inputFormGroup: FormGroup;
 
   constructor(private _formBuilder: FormBuilder) { 
-    this.typeChart = ["column", "bar"]; 
+    const typeChart = ["column", "bar"]; 
 
     // call drawChart function for column chart and bar graph
-    for(this.i of this.typeChart ){
-      console.log(this.i);
-      this.drawChart(this.i);
+    for(let type of typeChart ){
+      console.log(type);
+      this.drawChart(type);
       
     }
 
     this.drawPie();
     this.drawDonut();
-   }
+  }
 
   ngOnInit() {
     // Checks whether input string is not empty
@@ -36,17 +34,16 @@ export class Chart1Component implements OnInit {
       year: ['', Validators.required],
       rainfall: ['', Validators.required]
     });
-
   }
 
   // function to Draw Charts
-  drawChart(i) {
-    i = new Chart({
+  drawChart(type: string): void {
+    const chart  = new Chart({
       chart: {
-        type: i
+        type: type
       },
       title: {
-        text: 'Yearly Average Rainfall' + " (" + i + " " + "Graph)"
+        text: 'Yearly Average Rainfall' + " (" + type + " " + "Graph)"
       },
       legend : {
         layout: 'vertical',
@@ -82,68 +79,67 @@ export class Chart1Component implements OnInit {
       }
      ]
     });
-    this.allCharts.push(i);
+    this.allCharts.push(chart);
   }
 
-// function for Pie Chart
-  drawPie() {
-  this.pieChart = new Chart ({
-    chart: {
-      type: "pie"
-    },
-    
-    title : {
-      text: 'Yearly Average Rainfall (Pie Chart)'   
-    },
-    credits: {
-    enabled: false
-    },
-    series : [
-    {
-      name : 'Mumbai',
-      data : [["1999",200],["2000",300],["2001",450],["2002",209]],
-      type : undefined
-  }]
-  })
-}
-
-// function for Donut Chart
-drawDonut() {
-  this.donutChart = new Chart ({
-    chart: {
-      type: "pie"
-    },
-    title : {
-        text: 'Yearly Average Rainfall (Donut Chart)'   
-    },
-    credits: {
-      enabled: false
-    },
-    plotOptions : {
-      pie: {
-        shadow: false,
-        center: ['50%', '50%'],
-        size : '45%',
-        innerSize : '50%'
-      }
-    },
-    series : [
-      {
+  // function for Pie Chart
+  drawPie(): void {
+    this.pieChart = new Chart ({
+      chart: {
+        type: "pie"
+      },
+      
+      title : {
+        text: 'Yearly Average Rainfall (Pie Chart)'
+      },
+      credits: {
+        enabled: false
+      },
+      series : [{
         name : 'Mumbai',
         data : [["1999",200],["2000",300],["2001",450],["2002",209]],
         type : undefined
-    }]
-  })
-}
+      }]
+    })
+  }
+
+  // function for Donut Chart
+  drawDonut(): void {
+    this.donutChart = new Chart ({
+      chart: {
+        type: "pie"
+      },
+      title : {
+          text: 'Yearly Average Rainfall (Donut Chart)'   
+      },
+      credits: {
+        enabled: false
+      },
+      plotOptions : {
+        pie: {
+          shadow: false,
+          center: ['50%', '50%'],
+          size : '45%',
+          innerSize : '50%'
+        }
+      },
+      series : [
+        {
+          name : 'Mumbai',
+          data : [["1999",200],["2000",300],["2001",450],["2002",209]],
+          type : undefined
+      }]
+    })
+  }
 
   // function to add new point in graph
-  add(year, rainfall) {
+  add(year: any, rainfall: string): void {
     console.log(year, rainfall)
 
     if (year != "" && rainfall != "") {
-      for(this.i of this.allCharts ) {
-        this.i.options.xAxis.categories.push(year);
-        this.i.addPoint(parseInt(rainfall));
+      for(let chart of this.allCharts) {
+        chart.options.xAxis.categories.push(parseInt(year));
+        chart.addPoint(parseInt(rainfall));
       }
     // console.log(typeof(year));
       this.pieChart.addPoint([year,parseInt(rainfall)]);

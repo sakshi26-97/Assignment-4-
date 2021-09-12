@@ -9,13 +9,14 @@ import { interval } from 'rxjs';
   styleUrls: ['./chart2.component.css']
 })
 export class Chart2Component implements OnInit {
-  public categoryArray;
-  public dataArray;
-  public jsondata;
+  public categoryArray: string[];
+  public dataArray: number[];
+  public jsondata:  {
+    year: string;
+    avgRainfall: number;
+  }[];
   intervals;
-  public typeChart;
   allCharts:any = [];
-  i;
 
 
   constructor() {
@@ -28,12 +29,11 @@ export class Chart2Component implements OnInit {
     // console.log(this.categoryArray.length);
     // console.log(this.dataArray);
 
-    this.typeChart = ["line", "area"]; 
+    const typeChart = ["line", "area"]; 
 
     // call drawChart function for line and area graph
-    for(this.i of this.typeChart) {
-      console.log(this.i);
-      this.drawChart(this.i);
+    for(let type of typeChart) {
+      this.drawChart(type);
     }
 
     this.initRandom();
@@ -43,11 +43,11 @@ export class Chart2Component implements OnInit {
   }
 
   // Draw Charts
-  drawChart(i){ 
+  drawChart(type: string): void { 
 
-    i = new Chart({
+    const chart = new Chart({
       chart: {
-        type: i
+        type: type
       },
       title: {
         text: 'Yearly Average Rainfall'
@@ -77,32 +77,31 @@ export class Chart2Component implements OnInit {
         }
       ]
     });
-    this.allCharts.push(i);
+    this.allCharts.push(chart);
   }
   
   // Generates Random Data using Random Generator Function
-  generateRandomData() {
-    for(this.i of this.allCharts ) {
-    let rainy = Math.floor(Math.random() * 1000);
-    let yearly = (parseInt(this.categoryArray[this.categoryArray.length-1]) + 1).toString();
-    this.dataArray.push(rainy);
-    this.categoryArray.push(yearly);
-    // console.log(this.dataArray);
-    // console.log(this.categoryArray);
-    this.i.addPoint([yearly,rainy]);
+  generateRandomData(): void {
+    for(let chart of this.allCharts) {
+      let rainy = Math.floor(Math.random() * 1000);
+      let yearly = (parseInt(this.categoryArray[this.categoryArray.length-1]) + 1).toString();
+      this.dataArray.push(rainy);
+      this.categoryArray.push(yearly);
+      // console.log(this.dataArray);
+      // console.log(this.categoryArray);
+      chart.addPoint([yearly,rainy]);
     }
   }
 
   // Calls generateRandomData() funtion after every 2 sec
-  initRandom() {
+  initRandom(): void {
     this.intervals = interval(2000).subscribe((val)=> {
-      console.log("val", val);
       this.generateRandomData();
     })
   }
 
   // Function to stop plotting of random numbers
-  stop() {
+  stop(): void {
     this.intervals.unsubscribe();
   }
   
